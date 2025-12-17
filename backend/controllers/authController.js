@@ -2,12 +2,14 @@ const User = require("../models/User");
 const bcrypt = require("bcryptjs");
 const emailValidator = require("email-validator");
 const generateToken = require("../config/token");
+const { encrypt } = require("../utils/encrypt");
 
 exports.registerUser = async (req, res) => {
   try {
-    const { name, email, password, aadhaarEncrypted } = req.body;
+    const { name, email, password, aadhaar } = req.body;
+ console.log("AADHAAR VALUE:", req.body.aadhaar);
 
-    if (!name || !email || !password || !aadhaarEncrypted) {
+    if (!name || !email || !password || !aadhaar) {
       return res.status(400).json({ message: "All fields are required" });
     }
 
@@ -21,6 +23,8 @@ exports.registerUser = async (req, res) => {
     }
 
     const hashedPassword = await bcrypt.hash(password, 10);
+    const aadhaarEncrypted = encrypt(aadhaar);
+    console.log("AADHAAR VALUE:",aadhaarEncrypted);
 
     const user = await User.create({
       name,
@@ -50,8 +54,6 @@ exports.registerUser = async (req, res) => {
     });
   }
 };
-
-
 
 exports.loginUser = async (req, res) => {
   try {
