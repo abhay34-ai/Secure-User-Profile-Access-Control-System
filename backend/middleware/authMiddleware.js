@@ -9,7 +9,7 @@ const authMiddleware = (req, res, next) => {
       token = req.cookies.token;
     }
 
-    // 2️⃣ OR get token from Authorization header
+    // 2️⃣ OR Authorization header
     if (!token && req.headers.authorization) {
       token = req.headers.authorization.split(" ")[1];
     }
@@ -19,7 +19,11 @@ const authMiddleware = (req, res, next) => {
     }
 
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    req.user = decoded; // { userId }
+
+    // ✅ FIX: normalize req.user
+    req.user = {
+      userId: decoded.userId,
+    };
 
     next();
   } catch (error) {

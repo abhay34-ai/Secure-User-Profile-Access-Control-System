@@ -97,3 +97,25 @@ exports.loginUser = async (req, res) => {
     });
   }
 };
+
+
+
+exports.logoutUser = async (req, res) => {
+  try {
+    res.cookie("token", "", {
+      httpOnly: true,
+      secure: false,     
+      sameSite: "lax",
+      expires: new Date(0) 
+    });
+
+    res.status(200).json({
+      message: "Logout successful"
+    });
+  } catch (error) {
+    res.status(500).json({
+      message: "Logout failed",
+      error: error.message,
+    });
+  }
+};
