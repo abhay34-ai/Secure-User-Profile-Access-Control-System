@@ -14,9 +14,10 @@ function Profile() {
       <Navbar />
       <div className="profile-page">
         <div className="profile-container">
-               <h2 className="profile-title">My Profile</h2>
-            <hr className="profile-divider" />
-
+          <h2 className="profile-title">
+            My Profile
+            <hr />
+          </h2>
 
           <div className="profile-card">
             <div className="profile-row">
@@ -32,6 +33,12 @@ function Profile() {
             <div className="profile-row">
               <span>Aadhaar No</span>
               <span className="aadhaar">{user.aadhaar}</span>
+            </div>
+
+            {/* ✅ NEW: Balance */}
+            <div className="profile-row">
+              <span>Balance</span>
+              <span>₹{user.balance}</span>
             </div>
 
             <div className="profile-row">

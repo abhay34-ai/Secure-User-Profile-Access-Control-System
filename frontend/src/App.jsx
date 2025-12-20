@@ -6,6 +6,8 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Home from "./pages/Home";
 import Profile from "./pages/Profile";
+import Transfer from "./pages/Transfer";
+import History from "./pages/History";
 
 function App() {
 
@@ -17,7 +19,9 @@ function App() {
         <Route path="/register" element={<Register/>}/>
         <Route path="/login" element={<Login />}/>
         <Route path="/profile" element={<Profile />} />
-        
+        <Route path="/transfer" element={<Transfer />} />
+        <Route path="/history" element={<History />} />
+
       </Routes>
 
     </>

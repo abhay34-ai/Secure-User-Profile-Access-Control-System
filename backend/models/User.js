@@ -1,6 +1,5 @@
-// User schema designed for identity management
-// Aadhaar number is stored in encrypted form to ensure data security 
 
+// structure of data jo store karna hai 
 const mongoose = require("mongoose");
 const userSchema = new mongoose.Schema(
   {
@@ -26,6 +25,12 @@ const userSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    balance: {
+      type: Number,
+      default: 1000   // initial balance  
+    }
+
+
   },
   { timestamps: true }
 );

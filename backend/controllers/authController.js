@@ -4,6 +4,8 @@ const emailValidator = require("email-validator");
 const generateToken = require("../config/token");
 const { encrypt } = require("../utils/encrypt");
 
+
+
 exports.registerUser = async (req, res) => {
   try {
     const { name, email, password, aadhaar } = req.body;
@@ -55,6 +57,12 @@ exports.registerUser = async (req, res) => {
   }
 };
 
+
+
+
+
+
+
 exports.loginUser = async (req, res) => {
   try {
     const { email, password } = req.body;
@@ -97,6 +105,8 @@ exports.loginUser = async (req, res) => {
     });
   }
 };
+
+
 
 
 

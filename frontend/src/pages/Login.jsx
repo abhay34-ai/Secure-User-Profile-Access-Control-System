@@ -20,13 +20,12 @@ function Login() {
       { withCredentials: true }
     );
 
-    // 🔥 Immediately fetch profile after login
     const profileRes = await axios.get(
       `${serverUrl}/api/profile`,
       { withCredentials: true }
     );
 
-    setUser(profileRes.data); // correct + complete user
+    setUser(profileRes.data); 
     navigate("/");
   } catch (error) {
     console.log(error.response?.data || error.message);

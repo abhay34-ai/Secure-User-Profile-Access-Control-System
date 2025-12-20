@@ -15,6 +15,7 @@ exports.getProfile = async (req, res) => {
       name: user.name,
       email: user.email,
       aadhaar,
+       balance: user.balance,
       createdAt: user.createdAt,
     });
   } catch (error) {

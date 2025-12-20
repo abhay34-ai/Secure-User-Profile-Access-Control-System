@@ -72,6 +72,8 @@ function Navbar() {
 
       <div>
          <Link to="/" className="nav-link">Home</Link>
+         <Link to="/transfer" className="nav-link">Transfer</Link>
+         <Link to="/history" className="nav-link">History</Link>
       </div>
 
         
