@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { authDataContext } from "../context/AuthContext";
+import { authDataContext } from "../context/Authcontext";
 import Navbar from "../components/Navbar";
 import "./styles/Profile.css";
 
@@ -19,7 +19,7 @@ function Profile() {
     return (
       <>
         <Navbar />
-        <p className="profile-error">Please login to view profile.</p>
+        <p className="profile-error">No user found</p>
       </>
     );
   }
@@ -32,7 +32,6 @@ function Profile() {
         <div className="profile-card">
           <h2 className="profile-title">My Profile</h2>
 
-          {/* Balance highlight */}
           <div className="balance-box">
             <p>Current Balance</p>
             <h3>₹{user.balance}</h3>

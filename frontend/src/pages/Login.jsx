@@ -1,7 +1,7 @@
 import { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
-import { authDataContext } from "../context/AuthContext";
+import { authDataContext } from "../context/Authcontext";
 import { toast } from "react-toastify";
 import Loader from "../components/Loader";
 import "./styles/auth.css";
@@ -21,24 +21,19 @@ function Login() {
     setLoading(true);
 
     try {
-      await axios.post(
-        `${serverUrl}/api/auth/login`,
-        { email, password },
-        { withCredentials: true }
-      );
+      await axios.post(`${serverUrl}/api/auth/login`, {
+        email,
+        password,
+      });
 
-      const profileRes = await axios.get(
-        `${serverUrl}/api/profile`,
-        { withCredentials: true }
-      );
-
+      const profileRes = await axios.get(`${serverUrl}/api/profile`);
       setUser(profileRes.data);
+
       toast.success("Login successful");
       navigate("/");
     } catch (err) {
       const msg =
         err.response?.data?.message || "Invalid email or password";
-
       setError(msg);
       toast.error(msg);
     } finally {

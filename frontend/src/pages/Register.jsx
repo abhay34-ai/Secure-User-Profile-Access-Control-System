@@ -1,7 +1,7 @@
 import { useState, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
-import { authDataContext } from "../context/AuthContext";
+import { authDataContext } from "../context/Authcontext";
 import { toast } from "react-toastify";
 import Loader from "../components/Loader";
 import "./styles/auth.css";
@@ -27,11 +27,12 @@ function Register() {
     }
 
     try {
-      await axios.post(
-        `${serverUrl}/api/auth/register`,
-        { name, email, password, aadhaar },
-        { withCredentials: true }
-      );
+      await axios.post(`${serverUrl}/api/auth/register`, {
+        name,
+        email,
+        password,
+        aadhaar,
+      });
 
       toast.success("Registration successful. Please login.");
       navigate("/login");
@@ -83,9 +84,11 @@ function Register() {
           <div className="form-group">
             <label>Aadhaar Number</label>
             <input
-              type="number"
-              maxLength="12"
-              onChange={(e) => setAadhaar(e.target.value)}
+              type="text"
+              inputMode="numeric"
+              maxLength={12}
+              value={aadhaar}
+              onChange={(e) => setAadhaar(e.target.value.replace(/\D/g, ""))}
               required
               disabled={loading}
             />
