@@ -26,7 +26,7 @@ function Transfer() {
 
       toast.success(res.data.message || "Transfer successful");
 
-      // Refresh profile for real-time balance update
+      
       const profileRes = await axios.get(
         `${serverUrl}/api/profile`,
         { withCredentials: true }

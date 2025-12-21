@@ -94,21 +94,21 @@
 
 
 
-/* Large screens (desktops & large laptops) */
+/* desktops */
 @media (min-width: 1200px) {
   .auth-card {
     max-width: 420px;
   }
 }
 
-/* Medium screens (laptops & tablets - landscape) */
+/* tablets */
 @media (max-width: 1024px) {
   .auth-card {
     width: 75vw;
   }
 }
 
-/* Tablets (portrait) */
+
 @media (max-width: 768px) {
   .auth-card {
     width: 85vw;
