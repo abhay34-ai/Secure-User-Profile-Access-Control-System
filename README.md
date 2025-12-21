@@ -7,7 +7,7 @@ This project is a combined implementation of Assignment 1 (Secure User Profile &
 
 The system provides secure user authentication, encrypted identity management, and atomic peer-to-peer fund transfers. User authentication is implemented using JWT-based stateless authentication, while sensitive identity data such as Aadhaar/ID numbers are encrypted at rest using AES encryption and decrypted only for authorized access.
 
-Additionally, the application maintains an immutable transaction audit log, allowing users to view their complete transaction history with real-time balance updates. The project is developed using a full-stack MERN architecture and includes documented AI-assisted development, as required by the submission guidelines.
+
 -------
 
 # Setup & Run Instructions
@@ -15,17 +15,17 @@ Additionally, the application maintains an immutable transaction audit log, allo
 Follow the steps below to set up and run the project locally.
 
 🔹 Prerequisites
-Node.js (v18 or above)
-npm
-MongoDB 
-React js
-Git
+-Node.js (v18 or above)
+-npm
+-MongoDB 
+-React js
+-Git
 
 ---
 
-- Clone the Repository
-git clone <[your-github-repo-link](https://github.com/abhay34-ai/Secure-User-Profile-Access-Control-System)>
-cd <repository-folder>
+🔹 Clone the Repository
+-git clone <(https://github.com/abhay34-ai/Secure-User-Profile-Access-Control-System)>
+-cd <repository-folder>
 
 ---
 
