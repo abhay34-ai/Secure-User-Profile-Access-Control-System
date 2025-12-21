@@ -1,63 +1,38 @@
 
-# Secure User Profile Access Control & Transaction Audit System
+## 📌 Project Overview
 
-##  Project Overview
+This project is a **combined implementation of Assignment 1 (Secure User Profile & Access Control System)** and **Assignment 2 (Real-time Transaction & Audit Log System)**.
 
-This project is a **merged implementation of Assignment 1 and Assignment 2**, built as a secure full-stack MERN application.
+The system provides **secure user authentication**, **encrypted identity management**, and **atomic peer-to-peer fund transfers**. User authentication is implemented using **JWT-based stateless authentication**, while sensitive identity data such as **Aadhaar/ID numbers are encrypted at rest using AES encryption** and decrypted only for authorized access.
 
-The system provides:
-- Secure authentication and user profile management
-- Aadhaar number encryption and decryption
-- Peer-to-peer fund transfer system
-- Transaction audit logs and history
-- Unified frontend dashboard
-
-Both assignments are **fully completed, integrated, and functional** in a single application.
+In addition, the system maintains a **persistent transaction audit log**, allowing users to track transaction history and balance updates securely.
 
 ---
 
-##  Assignments Covered
+## ⚙️ Setup & Run Instructions
 
-###  Assignment 1: Secure User Profile & Access Control
-- User registration and login using JWT
-- Aadhaar number encrypted before database storage
-- Decryption of Aadhaar only for authenticated profile access
-- Protected routes using authentication middleware
-
-###  Assignment 2: Real-time Transaction & Audit Log System
-- Fund transfer between users
-- Atomic debit and credit transaction handling
-- Transaction audit logging
-- Transaction history view for users
+Follow the steps below to set up and run the project locally.
 
 ---
 
-##  Technology Stack
+### 🔹 Prerequisites
 
-### Backend
-- Node.js
-- Express.js
-- MongoDB & Mongoose
-- JWT Authentication
-- AES Encryption (crypto)
+Ensure the following are installed:
 
-### Frontend
-- React.js
-- Axios
-- Custom CSS
+* Node.js (v18 or above)
+* npm
+* MongoDB (local or Atlas)
+* React.js
+* Git
 
 ---
-
-##  Folder Structure
-
-### Backend Structure
-```
+ # backend folder structure
 
 backend/
 │
 ├── config/
-│   ├── db.js            # MongoDB connection
-│   └── token.js         # JWT token utility
+│   ├── db.js
+│   └── token.js
 │
 ├── controllers/
 │   ├── authController.js
@@ -78,17 +53,14 @@ backend/
 │   └── transactionRoutes.js
 │
 ├── utils/
-│   └── encrypt.js       # Aadhaar encryption & decryption
+│   └── encrypt.js
 │
 ├── .env
 └── server.js
 
-```
-
 ---
 
-### Frontend Structure
-```
+# frontend folder structure
 
 frontend/
 │
@@ -121,77 +93,152 @@ frontend/
 │
 ├── .gitignore
 
-````
+
+
+
+### 🔹 Clone the Repository
+
+```bash
+git clone https://github.com/abhay34-ai/Secure-User-Profile-Access-Control-System
+cd Secure-User-Profile-Access-Control-System
+```
 
 ---
 
-##  Security Implementation
+### 🔹 Backend Setup
 
-- Passwords are hashed before storage
-- Aadhaar number encrypted using AES before saving to database
-- Aadhaar decrypted only for authenticated users
-- JWT authentication with protected routes
-- Token validation using middleware
+Navigate to the backend directory:
 
----
-
-## 🔄 API Endpoints
-
-### Authentication
-- `POST /api/auth/register`
-- `POST /api/auth/login`
-- `POST /api/auth/logout`
-
-### Profile
-- `GET /api/profile` (Protected)
-
-### Transactions
-- `POST /api/transaction/transfer`
-- `GET /api/transaction/history`
-
----
-
-## 🖥️ Frontend Features
-
-- Login & Registration pages
-- Secure profile dashboard
-- Fund transfer form
-- Transaction history table
-- Loader and Navbar components
-- Responsive UI
-
----
-
-##  AI Tool Usage Log (MANDATORY)
-
-AI tools (ChatGPT) were used for:
-- Designing JWT authentication flow
-- Creating Aadhaar encryption/decryption utility
-- Structuring transaction and audit log logic
-- Backend controller and middleware logic
-- Frontend UI component structure and styling
-- Debugging and error handling improvements
-
-*
-
-AI tools significantly improved development speed and reduced boilerplate work, while final integration and debugging were done manually.
-
----
-
-##  How to Run the Project
-
-backend
-
+```bash
 cd backend
 npm install
+```
+
+Create a `.env` file inside the `backend` directory and add:
+
+```env
+PORT=5000
+MONGO_URI=your_mongodb_connection_string
+JWT_SECRET=your_jwt_secret
+AES_SECRET=your_aes_secret
+```
+
+Start the backend server:
+
+```bash
 npm run dev
+```
 
+Backend runs on:
 
-frontend
+```
+http://localhost:5000
+```
 
+---
+
+### 🔹 Frontend Setup
+
+Open a new terminal and run:
+
+```bash
 cd frontend
 npm install
 npm run dev
+```
+
+Frontend runs on:
+
+```
+http://localhost:5173
+```
+
+---
+
+## 🔗 API Documentation (Core Endpoints)
+
+### Authentication & Profile
+
+| Method | Endpoint             | Description                      |
+| ------ | -------------------- | -------------------------------- |
+| POST   | `/api/auth/register` | User registration                |
+| POST   | `/api/auth/login`    | User login                       |
+| GET    | `/api/profile`       | Fetch authenticated user profile |
+
+---
+
+### Transactions
+
+| Method | Endpoint                    | Description              |
+| ------ | --------------------------- | ------------------------ |
+| POST   | `/api/transfer`             | Atomic fund transfer     |
+| GET    | `/api/transactions/history` | User transaction history |
+
+---
+
+## 🗄️ Database Schema
+
+### User Collection
+
+* name
+* email (unique)
+* password (hashed)
+* aadhaarEncrypted (AES encrypted)
+* balance
+* createdAt
+
+### Transaction Collection
+
+* senderId
+* receiverId
+* amount
+* status (SUCCESS / FAILED)
+* reason (if failed)
+* timestamp
+
+### AuditLog Model (MongoDB)
+
+transactionId  
+senderId 
+receiverId
+amount 
+status (SUCCESS / FAILED)
+timestamp 
+
+---
+
+## 🔐 Security Highlights
+
+* JWT-based stateless authentication
+* Password hashing using bcrypt
+* AES encryption for sensitive identity data
+* Protected routes with authentication middleware
+* Atomic database transactions for fund transfers
+* Immutable transaction audit logs
+
+---
 
 
+### 1️⃣ AI-Assisted Tasks
 
+The following tasks were assisted using **AI-based development tools (ChatGPT)**:
+
+* Generated JWT authentication middleware structure
+* Assisted in AES encryption/decryption utility functions
+* Helped design token validation logic
+* Generated backend controller and route boilerplate
+* Assisted with database transaction logic for fund transfers
+* Helped structure the transaction history table UI
+* Assisted in structuring this README.md as per submission guidelines
+
+All AI-generated code was **reviewed, modified, and integrated manually**.
+
+---
+
+
+## 👨‍💻 Author
+
+**Abhay Thakre**
+B.Tech Student VJTI
+
+---
