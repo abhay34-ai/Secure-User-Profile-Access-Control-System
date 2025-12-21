@@ -3,7 +3,6 @@ const User = require("../models/User");
 const Transaction = require("../models/Transaction");
 const AuditLog = require("../models/AuditLog");
 
-// transfer
 exports.transferAmount = async (req, res) => {
   const session = await mongoose.startSession();
   session.startTransaction();
@@ -12,15 +11,19 @@ exports.transferAmount = async (req, res) => {
     const senderId = req.user.userId;
     const { receiverId, amount } = req.body;
 
-    if (!receiverId || !amount) {
+    const amountNumber = Number(amount);
+
+    if (!receiverId || !amountNumber) {
+      await session.abortTransaction();
+      session.endSession();
       return res.status(400).json({
         message: "Receiver ID and amount are required",
       });
     }
-        const amountNumber = Number(amount); 
 
-
-    if (amount <= 0) {
+    if (amountNumber <= 0) {
+      await session.abortTransaction();
+      session.endSession();
       return res.status(400).json({
         message: "Amount must be greater than zero",
       });
@@ -30,14 +33,17 @@ exports.transferAmount = async (req, res) => {
     const receiver = await User.findById(receiverId).session(session);
 
     if (!receiver) {
+      await session.abortTransaction();
+      session.endSession();
       return res.status(404).json({ message: "Receiver not found" });
     }
 
-    if (sender.balance < amount) {
+    if (sender.balance < amountNumber) {
+      await session.abortTransaction();
+      session.endSession();
       return res.status(400).json({ message: "Insufficient balance" });
     }
 
-   
     sender.balance -= amountNumber;
     receiver.balance += amountNumber;
 
@@ -49,7 +55,7 @@ exports.transferAmount = async (req, res) => {
         {
           sender: senderId,
           receiver: receiverId,
-          amount:amountNumber,
+          amount: amountNumber,
           status: "SUCCESS",
         },
       ],
@@ -60,7 +66,7 @@ exports.transferAmount = async (req, res) => {
       transactionId: transaction[0]._id,
       senderId,
       receiverId,
-      amount,
+      amount: amountNumber,
       status: "SUCCESS",
     });
 
@@ -82,8 +88,6 @@ exports.transferAmount = async (req, res) => {
   }
 };
 
-
-// history 
 exports.getTransactionHistory = async (req, res) => {
   try {
     const userId = req.user.userId;
@@ -101,4 +105,4 @@ exports.getTransactionHistory = async (req, res) => {
       error: error.message,
     });
   }
-}; 
+};

@@ -9,7 +9,6 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-
 connectDB();
 
 app.use(express.json());
@@ -17,19 +16,14 @@ app.use(cookieParser());
 
 app.use(
   cors({
-    origin: "http://localhost:5173", 
-    credentials: true,               
+    origin: true,        //  allows Render requests
+    credentials: true,
   })
 );
 
 app.use("/api/auth", require("./routes/authRoutes"));
 app.use("/api/profile", require("./routes/profileRoutes"));
-
-
-const transactionRoutes = require("./routes/transactionRoutes");
-app.use("/api/transactions", transactionRoutes);
-
-
+app.use("/api/transactions", require("./routes/transactionRoutes"));
 
 app.get("/", (req, res) => {
   res.send("Secure User Profile API is running");
@@ -42,7 +36,6 @@ app.use((err, req, res, next) => {
   next();
 });
 
-
-app.listen(PORT, () => {
-  console.log(`Server running on http://localhost:${PORT}`);
+app.listen(PORT, "0.0.0.0", () => {
+  console.log(`Server running on port ${PORT}`);
 });

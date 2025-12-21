@@ -127,13 +127,22 @@ http://localhost:5173
 * balance
 * createdAt
 
-### Transaction Audit Log Collection
+### Transaction Collection
 
 * senderId
 * receiverId
 * amount
 * status (SUCCESS / FAILED)
 * reason (if failed)
+* timestamp
+
+### Audit Log Collection
+
+* transactionId
+* senderId
+* receiverId
+* amount
+* status (SUCCESS / FAILED)
 * timestamp
 
 ---
@@ -240,9 +249,6 @@ frontend/
 
 Abhay Thakre
 B.Tech Student
-Graduate Engineer Trainee (GET) Candidate
+VJTI
 
-````
-
----
 

@@ -4,11 +4,9 @@ const emailValidator = require("email-validator");
 const generateToken = require("../config/token");
 const { encrypt } = require("../utils/encrypt");
 
-//  register controlller
 exports.registerUser = async (req, res) => {
   try {
     const { name, email, password, aadhaar } = req.body;
-    console.log("AADHAAR VALUE:", req.body.aadhaar);
 
     if (!name || !email || !password || !aadhaar) {
       return res.status(400).json({ message: "All fields are required" });
@@ -25,7 +23,6 @@ exports.registerUser = async (req, res) => {
 
     const hashedPassword = await bcrypt.hash(password, 10);
     const aadhaarEncrypted = encrypt(aadhaar);
-    console.log("AADHAAR VALUE:",aadhaarEncrypted);
 
     const user = await User.create({
       name,
@@ -38,8 +35,8 @@ exports.registerUser = async (req, res) => {
 
     res.cookie("token", token, {
       httpOnly: true,
-      secure: false,
-      sameSite: "lax",
+      secure: true,
+      sameSite: "none",
       maxAge: 60 * 60 * 1000
     });
 
@@ -56,12 +53,6 @@ exports.registerUser = async (req, res) => {
   }
 };
 
-
-
-
-
-
-// login controller
 exports.loginUser = async (req, res) => {
   try {
     const { email, password } = req.body;
@@ -73,8 +64,6 @@ exports.loginUser = async (req, res) => {
     if (!emailValidator.validate(email)) {
       return res.status(400).json({ message: "Invalid email format" });
     }
-
-    
 
     const user = await User.findOne({ email });
     if (!user) {
@@ -90,8 +79,8 @@ exports.loginUser = async (req, res) => {
 
     res.cookie("token", token, {
       httpOnly: true,
-      secure: false,
-      sameSite: "lax",
+      secure: true,
+      sameSite: "none",
       maxAge: 60 * 60 * 1000
     });
 
@@ -107,17 +96,13 @@ exports.loginUser = async (req, res) => {
   }
 };
 
-
-
-// logout controller
-
 exports.logoutUser = async (req, res) => {
   try {
     res.cookie("token", "", {
       httpOnly: true,
-      secure: false,     
-      sameSite: "lax",
-      expires: new Date(0) 
+      secure: true,
+      sameSite: "none",
+      expires: new Date(0)
     });
 
     res.status(200).json({

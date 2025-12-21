@@ -1,8 +1,6 @@
 const User = require("../models/User");
 const { decrypt } = require("../utils/encrypt");
 
-
-// get userdata jo login hai
 exports.getProfile = async (req, res) => {
   try {
     const user = await User.findById(req.user.userId).select("-password");
@@ -17,7 +15,7 @@ exports.getProfile = async (req, res) => {
       name: user.name,
       email: user.email,
       aadhaar,
-       balance: user.balance,
+      balance: user.balance,
       createdAt: user.createdAt,
     });
   } catch (error) {
