@@ -4,7 +4,7 @@ import axios from "axios";
 import { authDataContext } from "../context/Authcontext";
 import { toast } from "react-toastify";
 import Loader from "../components/Loader";
-import "./styles/auth.css";
+import "./styles/Auth.css";
 
 function Register() {
   const navigate = useNavigate();
