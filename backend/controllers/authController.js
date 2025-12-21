@@ -4,12 +4,11 @@ const emailValidator = require("email-validator");
 const generateToken = require("../config/token");
 const { encrypt } = require("../utils/encrypt");
 
-
-
+//  register controlller
 exports.registerUser = async (req, res) => {
   try {
     const { name, email, password, aadhaar } = req.body;
- console.log("AADHAAR VALUE:", req.body.aadhaar);
+    console.log("AADHAAR VALUE:", req.body.aadhaar);
 
     if (!name || !email || !password || !aadhaar) {
       return res.status(400).json({ message: "All fields are required" });
@@ -62,7 +61,7 @@ exports.registerUser = async (req, res) => {
 
 
 
-
+// login controller
 exports.loginUser = async (req, res) => {
   try {
     const { email, password } = req.body;
@@ -74,6 +73,8 @@ exports.loginUser = async (req, res) => {
     if (!emailValidator.validate(email)) {
       return res.status(400).json({ message: "Invalid email format" });
     }
+
+    
 
     const user = await User.findOne({ email });
     if (!user) {
@@ -108,7 +109,7 @@ exports.loginUser = async (req, res) => {
 
 
 
-
+// logout controller
 
 exports.logoutUser = async (req, res) => {
   try {

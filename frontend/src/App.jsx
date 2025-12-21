@@ -8,7 +8,8 @@ import Home from "./pages/Home";
 import Profile from "./pages/Profile";
 import Transfer from "./pages/Transfer";
 import History from "./pages/History";
-
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 function App() {
 
   return (
@@ -23,6 +24,8 @@ function App() {
         <Route path="/history" element={<History />} />
 
       </Routes>
+
+      <ToastContainer position="top-right" autoClose={3000} />
 
     </>
   );

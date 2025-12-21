@@ -1,5 +1,4 @@
 
-// structure of data jo store karna hai 
 const mongoose = require("mongoose");
 const userSchema = new mongoose.Schema(
   {
@@ -27,7 +26,7 @@ const userSchema = new mongoose.Schema(
     },
     balance: {
       type: Number,
-      default: 1000   // initial balance  
+      default: 1000   //staring me  banance
     }
 
 

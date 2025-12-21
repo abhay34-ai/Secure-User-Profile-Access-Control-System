@@ -2,6 +2,9 @@ import { useState, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { authDataContext } from "../context/AuthContext";
+import { toast } from "react-toastify";
+import Loader from "../components/Loader";
+import "./styles/auth.css";
 
 function Register() {
   const navigate = useNavigate();
@@ -11,71 +14,89 @@ function Register() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [aadhaar, setAadhaar] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const handleSignup = async (e) => {
     e.preventDefault();
+    setLoading(true);
+
+    if (aadhaar.length !== 12) {
+      toast.error("Please enter all 12 digits of Aadhaar number");
+      setLoading(false);
+      return;
+    }
+
     try {
-      const result=await axios.post(
+      await axios.post(
         `${serverUrl}/api/auth/register`,
         { name, email, password, aadhaar },
         { withCredentials: true }
       );
-      
 
-      console.log(result.data)
-
-      navigate("/login"); 
-    } catch (error) {
-      console.log(error.response?.data || error.message);
+      toast.success("Registration successful. Please login.");
+      navigate("/login");
+    } catch (err) {
+      toast.error(
+        err.response?.data?.message || "Registration failed. Try again."
+      );
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
-    <div className="page">
-      <div className="card">
-        <h2>Register</h2>
+    <div className="auth-page">
+      <div className="auth-card">
+        <h2 className="auth-title">Register</h2>
 
-        <form onSubmit={handleSignup}>
-          <label>Name  </label>
-          <input
-            type="text"
-            placeholder="Name"
-            onChange={(e) => setName(e.target.value)}
-          />
+        <form onSubmit={handleSignup} className="auth-form">
+          <div className="form-group">
+            <label>Name</label>
+            <input
+              type="text"
+              onChange={(e) => setName(e.target.value)}
+              required
+              disabled={loading}
+            />
+          </div>
 
-          <br /><br />
+          <div className="form-group">
+            <label>Email</label>
+            <input
+              type="email"
+              onChange={(e) => setEmail(e.target.value)}
+              required
+              disabled={loading}
+            />
+          </div>
 
-          <label>Email  </label>
-          <input
-            type="email"
-            placeholder="Email"
-            onChange={(e) => setEmail(e.target.value)}
-          />
+          <div className="form-group">
+            <label>Password</label>
+            <input
+              type="password"
+              onChange={(e) => setPassword(e.target.value)}
+              required
+              disabled={loading}
+            />
+          </div>
 
-          <br /><br />
+          <div className="form-group">
+            <label>Aadhaar Number</label>
+            <input
+              type="number"
+              maxLength="12"
+              onChange={(e) => setAadhaar(e.target.value)}
+              required
+              disabled={loading}
+            />
+          </div>
 
-          <label>Password  </label>
-          <input
-            type="password"
-            placeholder="Password"
-            onChange={(e) => setPassword(e.target.value)}
-          />
-
-          <br /><br />
-
-          <label>Aadhaar Number  </label>
-          <input
-            type="text"
-            placeholder="Enter Aadhaar Number"
-            maxLength="12"
-            onChange={(e) => setAadhaar(e.target.value)}
-          />
-   <br /> <br />
-          <button type="submit">Register</button>
-          
+          <button type="submit" className="auth-btn" disabled={loading}>
+            {loading ? <Loader /> : "Register"}
+          </button>
         </form>
 
-        <p>
+        <p className="auth-footer">
           Already have an account? <Link to="/login">Login</Link>
         </p>
       </div>
@@ -84,23 +105,3 @@ function Register() {
 }
 
 export default Register;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

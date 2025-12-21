@@ -1,0 +1,96 @@
+.history-page {
+  padding: 80px 40px;
+}
+
+.balance {
+  margin: 10px 0 20px;
+  color: #333;
+  font-weight: 600;
+}
+
+/* Table */
+.history-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #fff;
+}
+
+.history-table th,
+.history-table td {
+  padding: 12px;
+  border-bottom: 1px solid #ddd;
+  text-align: left;
+}
+
+/* Incoming / Outgoing */
+.tx-type {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 600;
+}
+
+.tx-type.incoming {
+  color: green;
+}
+
+.tx-type.outgoing {
+  color: #d93025;
+}
+
+/* Amount */
+.amount-plus {
+  color: green;
+  font-weight: 600;
+}
+
+.amount-minus {
+  color: #d93025;
+  font-weight: 600;
+}
+
+/* Status badge */
+.status {
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 500;
+  display: inline-block;
+}
+
+/* SUCCESS */
+.status.success {
+  background-color: #e6f4ea;
+  color: #137333;
+}
+
+/* FAILED */
+.status.failed {
+  background-color: #fce8e6;
+  color: #d93025;
+}
+
+/* Failure reason */
+.fail-reason {
+  font-size: 11px;
+  margin-top: 4px;
+  color: #d93025;
+}
+
+/* Loader */
+.history-loader {
+  display: flex;
+  justify-content: center;
+  margin-top: 30px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .history-page {
+    padding: 80px 20px;
+  }
+
+  .history-table {
+    font-size: 13px;
+  }
+}

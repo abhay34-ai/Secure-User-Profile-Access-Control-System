@@ -1,25 +1,44 @@
 import { useContext } from "react";
 import { authDataContext } from "../context/AuthContext";
 import Navbar from "../components/Navbar";
-import "./Profile.css";
+import "./styles/Profile.css";
 
 function Profile() {
   const { user, loading } = useContext(authDataContext);
 
-  if (loading) return <p className="profile-loading">Loading profile...</p>;
-  if (!user) return <p className="profile-error">Please login to view profile.</p>;
+  if (loading) {
+    return (
+      <>
+        <Navbar />
+        <p className="profile-loading">Loading profile...</p>
+      </>
+    );
+  }
+
+  if (!user) {
+    return (
+      <>
+        <Navbar />
+        <p className="profile-error">Please login to view profile.</p>
+      </>
+    );
+  }
 
   return (
     <>
       <Navbar />
-      <div className="profile-page">
-        <div className="profile-container">
-          <h2 className="profile-title">
-            My Profile
-            <hr />
-          </h2>
 
-          <div className="profile-card">
+      <div className="profile-page">
+        <div className="profile-card">
+          <h2 className="profile-title">My Profile</h2>
+
+          {/* Balance highlight */}
+          <div className="balance-box">
+            <p>Current Balance</p>
+            <h3>₹{user.balance}</h3>
+          </div>
+
+          <div className="profile-details">
             <div className="profile-row">
               <span>Name</span>
               <span>{user.name}</span>
@@ -35,15 +54,11 @@ function Profile() {
               <span className="aadhaar">{user.aadhaar}</span>
             </div>
 
-            {/* ✅ NEW: Balance */}
-            <div className="profile-row">
-              <span>Balance</span>
-              <span>₹{user.balance}</span>
-            </div>
-
             <div className="profile-row">
               <span>Account Created</span>
-              <span>{new Date(user.createdAt).toLocaleDateString()}</span>
+              <span>
+                {new Date(user.createdAt).toLocaleDateString()}
+              </span>
             </div>
           </div>
         </div>

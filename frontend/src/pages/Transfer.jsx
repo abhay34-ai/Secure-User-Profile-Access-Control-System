@@ -2,67 +2,91 @@ import { useState, useContext } from "react";
 import axios from "axios";
 import Navbar from "../components/Navbar";
 import { authDataContext } from "../context/AuthContext";
+import { toast } from "react-toastify";
+import Loader from "../components/Loader";
+import "./styles/Transfer.css";
 
 function Transfer() {
   const [receiverId, setReceiverId] = useState("");
   const [amount, setAmount] = useState("");
-  const [msg, setMsg] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const { serverUrl, setUser } = useContext(authDataContext);
 
   const transfer = async (e) => {
     e.preventDefault();
-    setMsg("");
+    setLoading(true);
 
     try {
-      // 1️⃣ Perform transfer
       const res = await axios.post(
         `${serverUrl}/api/transactions/transfer`,
         { receiverId, amount },
         { withCredentials: true }
       );
 
-      setMsg(res.data.message);
+      toast.success(res.data.message || "Transfer successful");
 
-      // 2️⃣ 🔥 REFRESH PROFILE (real-time update)
+      // Refresh profile for real-time balance update
       const profileRes = await axios.get(
         `${serverUrl}/api/profile`,
         { withCredentials: true }
       );
 
-      // 3️⃣ Update global user state
       setUser(profileRes.data);
-
       setReceiverId("");
       setAmount("");
     } catch (err) {
-      setMsg(err.response?.data?.message || "Transfer failed");
+      toast.error(
+        err.response?.data?.message || "Transfer failed"
+      );
+      setReceiverId("");
+      setAmount("");
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
     <>
       <Navbar />
-      <h3>Transfer</h3>
 
-      <form onSubmit={transfer}>
-        <input
-          placeholder="Receiver ID"
-          value={receiverId}
-          onChange={(e) => setReceiverId(e.target.value)}
-        />
+      <div className="transfer-page">
+        <div className="transfer-card">
+          <h2 className="transfer-title">Transfer Funds</h2>
 
-        <input
-          type="number"
-          placeholder="Amount"
-          value={amount}
-          onChange={(e) => setAmount(e.target.value)}
-        />
+          <form onSubmit={transfer} className="transfer-form">
+            <div className="form-group">
+              <label>Receiver ID</label>
+              <input
+                type="text"
+                value={receiverId}
+                onChange={(e) => setReceiverId(e.target.value)}
+                required
+                disabled={loading}
+              />
+            </div>
 
-        <button>Send</button>
-      </form>
+            <div className="form-group">
+              <label>Amount</label>
+              <input
+                type="number"
+                value={amount}
+                onChange={(e) => setAmount(e.target.value)}
+                required
+                disabled={loading}
+              />
+            </div>
 
-      <p>{msg}</p>
+            <button
+              type="submit"
+              className="transfer-btn"
+              disabled={loading}
+            >
+              {loading ? <Loader /> : "Send Money"}
+            </button>
+          </form>
+        </div>
+      </div>
     </>
   );
 }

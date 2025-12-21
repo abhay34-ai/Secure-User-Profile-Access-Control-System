@@ -1,4 +1,4 @@
-import "./Home.css";
+import "./styles/Home.css";
 import phoneImg from "../assets/home1.webp";
 import Navbar from "../components/Navbar";
 

@@ -3,7 +3,6 @@ const crypto = require("crypto");
 const ALGORITHM = "aes-256-cbc";
 const IV_LENGTH = 16;
 
-// Create a 32-byte key from secret
 const getKey = () => {
   return crypto
     .createHash("sha256")
@@ -11,7 +10,7 @@ const getKey = () => {
     .digest();
 };
 
-// 🔒 Encrypt function
+// encrypt
 const encrypt = (text) => {
   const iv = crypto.randomBytes(IV_LENGTH);
   const cipher = crypto.createCipheriv(ALGORITHM, getKey(), iv);
@@ -22,7 +21,7 @@ const encrypt = (text) => {
   return iv.toString("hex") + ":" + encrypted;
 };
 
-// 🔓 Decrypt function
+// Decrypt 
 const decrypt = (encryptedText) => {
   const [ivHex, encrypted] = encryptedText.split(":");
 

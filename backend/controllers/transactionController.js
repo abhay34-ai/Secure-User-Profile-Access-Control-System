@@ -3,7 +3,7 @@ const User = require("../models/User");
 const Transaction = require("../models/Transaction");
 const AuditLog = require("../models/AuditLog");
 
-// POST /api/transactions/transfer
+// transfer
 exports.transferAmount = async (req, res) => {
   const session = await mongoose.startSession();
   session.startTransaction();
@@ -37,7 +37,7 @@ exports.transferAmount = async (req, res) => {
       return res.status(400).json({ message: "Insufficient balance" });
     }
 
-    // Debit & credit
+   
     sender.balance -= amountNumber;
     receiver.balance += amountNumber;
 
@@ -82,7 +82,8 @@ exports.transferAmount = async (req, res) => {
   }
 };
 
-// GET /api/transactions/history
+
+// history 
 exports.getTransactionHistory = async (req, res) => {
   try {
     const userId = req.user.userId;

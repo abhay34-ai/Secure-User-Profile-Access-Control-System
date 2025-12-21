@@ -1,0 +1,150 @@
+.auth-page {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #ffffff;
+}
+
+
+.auth-card {
+  width: 70vw;
+  max-width: 400px;
+  background: #ffffff;
+  padding: 30px;
+  border-radius: 6px;
+  border: 1px solid #e5e5e5;
+}
+
+.auth-title {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #222;
+}
+
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group label {
+  font-size: 13px;
+  margin-bottom: 4px;
+  color: #444;
+}
+
+.form-group input {
+  padding: 10px;
+  font-size: 14px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+}
+
+.form-group input:focus {
+  outline: none;
+  border-color: #1f5ea8;
+}
+
+.auth-btn {
+  margin-top: 10px;
+  padding: 10px;
+  background: #1f5ea8;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.auth-btn:hover {
+  background: #184a87;
+}
+
+.auth-footer {
+  text-align: center;
+  margin-top: 15px;
+  font-size: 14px;
+}
+
+.auth-footer a {
+  color: #1f5ea8;
+  text-decoration: none;
+}
+
+
+.auth-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+.error-text {
+  color: #d93025;
+  font-size: 13px;
+  margin-top: -6px;
+}
+
+
+
+
+/* Large screens (desktops & large laptops) */
+@media (min-width: 1200px) {
+  .auth-card {
+    max-width: 420px;
+  }
+}
+
+/* Medium screens (laptops & tablets - landscape) */
+@media (max-width: 1024px) {
+  .auth-card {
+    width: 75vw;
+  }
+}
+
+/* Tablets (portrait) */
+@media (max-width: 768px) {
+  .auth-card {
+    width: 85vw;
+    padding: 24px;
+  }
+
+  .auth-title {
+    font-size: 20px;
+  }
+}
+
+/* Mobile devices */
+@media (max-width: 480px) {
+  .auth-page {
+    padding: 16px;
+  }
+
+  .auth-card {
+    width: 100%;
+    padding: 20px;
+  }
+
+  .auth-title {
+    font-size: 18px;
+  }
+
+  .form-group input {
+    font-size: 13px;
+    padding: 9px;
+  }
+
+  .auth-btn {
+    font-size: 14px;
+  }
+
+  .auth-footer {
+    font-size: 13px;
+  }
+}

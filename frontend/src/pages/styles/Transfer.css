@@ -1,0 +1,68 @@
+.transfer-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #ffffff;
+}
+
+.transfer-card {
+  width: 70vw;
+  max-width: 420px;
+  background: #ffffff;
+  padding: 30px;
+  border-radius: 6px;
+  border: 1px solid #e5e5e5;
+}
+
+.transfer-title {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #222;
+}
+
+.transfer-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.transfer-btn {
+  margin-top: 10px;
+  padding: 10px;
+  background: #1f5ea8;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.transfer-btn:hover {
+  background: #184a87;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .transfer-card {
+    width: 85vw;
+    padding: 24px;
+  }
+}
+
+@media (max-width: 480px) {
+  .transfer-page {
+    padding: 16px;
+  }
+
+  .transfer-card {
+    width: 100%;
+    padding: 20px;
+  }
+
+  .transfer-title {
+    font-size: 18px;
+  }
+}
