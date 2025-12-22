@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { authDataContext } from "../context/Authcontext";
 import navLogo from "../assets/nav.png";
-import "./styles/Navbar.css";
+import "./Styles/Navbar.css";
 
 function Navbar() {
   const { user, setUser, serverUrl, loading } = useContext(authDataContext);
