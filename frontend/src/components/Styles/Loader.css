@@ -4,6 +4,8 @@
   border-radius: 50%;
   position: relative;
   animation: rotate 1s linear infinite;
+  padding: 1px;
+
 }
 
 .loader::before,
